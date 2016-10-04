@@ -3,11 +3,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.matsim</groupId>
-	<artifactId>matsim-example-project</artifactId>
+	<artifactId>hybridsim-it</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>MATSim example project</name>
-	<description>MATSim example project</description>
+	<name>Hybridsim integration test</name>
+	<description>Hybridsim integration test</description>
 
 	<repositories>
 		<repository>
@@ -30,10 +30,17 @@
 		<dependency>
 			<groupId>org.matsim</groupId>
 			<artifactId>matsim</artifactId>
-			<version>0.8.0</version>
-		<!--	<version>0.9.0-SNAPSHOT</version> -->
-		<!-- use the snapshot if you want to program against the development version 
-		     (the "SNAPSHOT" means that it will be automatically updated) -->
+		    <version>0.9.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.matsim.contrib</groupId>
+			<artifactId>hybridsim</artifactId>
+			<version>0.9.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -41,14 +48,7 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		
-<!-- 		Example of how to add a contrib.  Note that the version numbers need to be consistent with the matsim version above! -->
-<!-- 		<dependency>
-			<groupId>org.matsim.contrib</groupId>
-			<artifactId>emissions</artifactId>
-			<version>0.8.0</version>
-		</dependency>
- -->	</dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -59,26 +59,21 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-					<showWarnings>false</showWarnings>
-					<showDeprecation>false</showDeprecation>
 					<encoding>UTF-8</encoding>
-					<!-- configure initial and maximal memory for compiling -->
-					<fork>true</fork>
-					<meminitial>128m</meminitial>
-					<maxmem>512m</maxmem>
-					<compilerArguments>
-						<Xmaxwarns>4000</Xmaxwarns>
-						<Xmaxerrs>100</Xmaxerrs>
-					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-eclipse-plugin</artifactId>
-			  <configuration>
-			    <downloadSources>true</downloadSources>
-			    <downloadJavadocs>true</downloadJavadocs>
-			  </configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.19.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
