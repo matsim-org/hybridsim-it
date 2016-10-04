@@ -6,4 +6,8 @@ services:
 before_install:
 - docker pull grgrlmml/hybrid_sumo_jps
 - docker run -p 0.0.0.0:9000:9000 -v `pwd`/test:/root/mnt grgrlmml/hybrid_sumo_jps jpscore --as-a-service -p 9000 --dump-scenario /root/mnt/ &
+- sleep 3
 - docker ps -a
+
+script:
+- mvn verify
